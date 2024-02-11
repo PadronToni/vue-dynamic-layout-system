@@ -4,7 +4,7 @@ import LayoutSystemRoot from './vue-dynamic-layout-system/LayoutSystemRoot.vue';
 
 <template>
   <header>
-    <nav>
+    <nav class="flex items-center gap-2 p-2 bg-emerald-600 text-white">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/other">Other</RouterLink>
     </nav>
