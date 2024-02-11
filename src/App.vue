@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LayoutSystemRoot from './vue-dynamic-layout-system/LayoutSystemRoot.vue';
+import { LayoutSystemRoot } from './vue-dynamic-layout-system/LayoutSystemRoot';
 </script>
 
 <template>
