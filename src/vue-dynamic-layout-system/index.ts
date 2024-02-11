@@ -1,7 +1,9 @@
 import { type App, type InjectionKey, inject, shallowRef, type ShallowRef } from 'vue'
 
-const currentLayout = shallowRef<string>('section')
-const LSInjectionKey = Symbol() as InjectionKey<ShallowRef<string>>
+export type LayoutComponentLike<L = abstract new (...args: any) => any> = L | keyof HTMLElementTagNameMap
+
+const currentLayout = shallowRef<LayoutComponentLike | undefined>()
+const LSInjectionKey = Symbol() as InjectionKey<ShallowRef<LayoutComponentLike | undefined>>
 
 export const createLayoutSystem = () => {
 
@@ -18,7 +20,7 @@ export const useLayoutSystem = () => {
 	/**
 	 * Sets the current layout
 	 */
-	function setLayout(layout: any) {
+	function setLayout(layout: LayoutComponentLike) {
 		_layout.value = layout
 	}
 
