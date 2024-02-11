@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { useLayoutSystem } from '@/vue-dynamic-layout-system';
 
-const { layout } = useLayoutSystem()
+const { layout, setLayout } = useLayoutSystem()
+
+setLayout('blockquote')
+
 </script>
+
 <template>
   <main>
     <h1> Other view </h1>

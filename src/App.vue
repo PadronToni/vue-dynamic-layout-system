@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import LayoutSystemRoot from './vue-dynamic-layout-system/LayoutSystemRoot.vue';
 </script>
 
 <template>
@@ -9,5 +9,5 @@ import { RouterView } from 'vue-router'
       <RouterLink to="/other">Other</RouterLink>
     </nav>
   </header>
-  <RouterView />
+  <LayoutSystemRoot></LayoutSystemRoot>
 </template>

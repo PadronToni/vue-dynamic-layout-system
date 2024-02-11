@@ -1,7 +1,7 @@
-import { type App, type InjectionKey, inject } from 'vue'
+import { type App, type InjectionKey, inject, shallowRef, type ShallowRef } from 'vue'
 
-const currentLayout = 'example string'
-const LSInjectionKey = Symbol() as InjectionKey<string>
+const currentLayout = shallowRef<string>('section')
+const LSInjectionKey = Symbol() as InjectionKey<ShallowRef<string>>
 
 export const createLayoutSystem = () => {
 
@@ -13,8 +13,15 @@ export const createLayoutSystem = () => {
 }
 
 export const useLayoutSystem = () => {
-	const layout = inject(LSInjectionKey)
-	console.log('there is the layout: ', layout)
-	return { layout }
+	const _layout = inject(LSInjectionKey)!
+
+	/**
+	 * Sets the current layout
+	 */
+	function setLayout(layout: any) {
+		_layout.value = layout
+	}
+
+	return { setLayout, layout: _layout }
 }
 
