@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { useLayoutSystem } from '@/vue-dynamic-layout-system';
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const { layout } = useLayoutSystem()
+const { layout, setLayout } = useLayoutSystem()
+
+setLayout(DefaultLayout)
+
 </script>
 
 <template>
-  <main>
-    <h1> Home view </h1>
+  <div>
+    <h1> Other view </h1>
     <span> there is the layout: {{ layout }} </span>
-  </main>
+  </div>
 </template>
+
