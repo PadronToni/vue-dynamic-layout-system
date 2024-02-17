@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 
-
+const fif = defineSlots<{
+	aside: () => boolean | undefined
+}>()
 </script>
 <template>
-	<main class="container p-4 mt-6 bg-[#303030]">
-		<RouterView></RouterView>
-	</main>
+	<div>
+
+		<main class="container p-4 mt-6 bg-zinc-800">
+			<RouterView></RouterView>
+		</main>
+
+		<aside v-if="fif.aside">
+			<component :is="fif.aside"> </component>
+		</aside>
+
+	</div>
 </template>
 
 
-<style scoped>
-
-</style>
+<style scoped></style>

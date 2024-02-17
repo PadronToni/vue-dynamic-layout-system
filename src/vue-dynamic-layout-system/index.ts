@@ -7,23 +7,23 @@ const LSInjectionKey = Symbol() as InjectionKey<ShallowRef<LayoutComponentLike |
 
 export const createLayoutSystem = () => {
 
-	function install(app: App) {
-		app.provide(LSInjectionKey, currentLayout)
-	}
+  function install(app: App) {
+    app.provide(LSInjectionKey, currentLayout)
+  }
 
-	return { install }
+  return { install }
 }
 
 export const useLayoutSystem = () => {
-	const _layout = inject(LSInjectionKey)!
+  const _layout = inject(LSInjectionKey)!
 
-	/**
-	 * Sets the current layout
-	 */
-	function setLayout(layout: LayoutComponentLike) {
-		_layout.value = layout
-	}
+  /**
+   * Sets the current layout
+   */
+  function setLayout(layout: LayoutComponentLike) {
+    _layout.value = layout
+  }
 
-	return { setLayout, layout: _layout }
+  return { setLayout, layout: _layout }
 }
 
