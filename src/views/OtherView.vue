@@ -2,7 +2,7 @@
 import { useLayoutSystem } from '@/vue-dynamic-layout-system';
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const { layout, setLayout } = useLayoutSystem()
+const { setLayout } = useLayoutSystem()
 
 setLayout(DefaultLayout)
 
@@ -11,7 +11,6 @@ setLayout(DefaultLayout)
 <template>
   <div>
     <h1> Other view </h1>
-    <span> there is the layout: {{ layout }} </span>
   </div>
 </template>
 
