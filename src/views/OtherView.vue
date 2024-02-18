@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { useLayoutSystem } from '@/vue-dynamic-layout-system';
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
-import { sas } from '@/layouts/layoutSystem';
+import { useLS } from '@/layouts/layoutSystem';
 
-const { layout } = sas()
+const { layout } = useLS()
 const { setLayout } = useLayoutSystem()
 
 setLayout('fif')
 console.log('eccolo: ', layout);
-
 
 </script>
 
