@@ -4,7 +4,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const { setLayout } = useLayoutSystem()
 
-setLayout(DefaultLayout)
+setLayout('fif')
 
 </script>
 
