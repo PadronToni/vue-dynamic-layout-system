@@ -3,11 +3,8 @@ import type { LayoutComponentLike } from "./types"
 import { currentLayout } from "./globals"
 import { _config, type LSConfig } from "."
 
-function defineUseLS<Layouts extends LSConfig['layouts']>(sharedLayoutRef: ShallowRef<LayoutComponentLike | undefined>,  config: LSConfig) {
+function defineUseLS<Layouts extends LSConfig['layouts']>(sharedLayoutRef: ShallowRef<LayoutComponentLike | undefined>, config: LSConfig) {
   return () => {
-
-    // gets the shared current layout
-    const _layout = sharedLayoutRef
 
     /**
      * Sets the current layout
@@ -17,22 +14,22 @@ function defineUseLS<Layouts extends LSConfig['layouts']>(sharedLayoutRef: Shall
 
         const component = config.layouts[layout]
 
-        _layout.value = component || layout
+        sharedLayoutRef.value = component || layout
       } else {
 
-        _layout.value = layout
+        sharedLayoutRef.value = layout
       }
     }
 
-    return { setLayout, layout: _layout }
+    return { setLayout, layout: sharedLayoutRef }
   }
 }
 
-export function defineLayoutSystem<C extends LSConfig>(init: C) {
+export function defineLayoutSystem<Config extends LSConfig>(config: Config) {
 
-  const currentLayout = shallowRef<LayoutComponentLike | undefined>()
+  const layoutRef = shallowRef<LayoutComponentLike | undefined>()
 
-  const useLayoutSystem = defineUseLS<C['layouts']>(currentLayout, init)
+  const useLayoutSystem = defineUseLS<Config['layouts']>(layoutRef, config)
 
   return { useLayoutSystem }
 
