@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { useLayoutSystem } from '@/vue-dynamic-layout-system';
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import { useLS } from '@/layouts/layoutSystem';
 
-const { layout, setLayout } = useLayoutSystem()
+const { layout } = useLS()
+const { setLayout } = useLayoutSystem()
 
-setLayout(DefaultLayout)
+setLayout('fif')
+console.log('eccolo: ', layout);
 
 </script>
 
 <template>
   <div>
     <h1> Other view </h1>
-    <span> there is the layout: {{ layout }} </span>
   </div>
 </template>
 
