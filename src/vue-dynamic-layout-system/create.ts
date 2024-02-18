@@ -1,5 +1,5 @@
 import type { App } from "vue"
-import { LSBaseKey, currentLayout } from "./globals"
+import { LSBaseKey as LSCentralKey, currentLayout } from "./globals"
 import type { LayoutComponentLike } from "."
 
 export interface LSConfig {
@@ -21,7 +21,7 @@ export const createLayoutSystem = (config?: LSConfig) => {
   config && Object.assign(_config, config);
 
   function install(app: App) {
-    app.provide(LSBaseKey, currentLayout)
+    app.provide(LSCentralKey, currentLayout)
   }
 
   return { install }

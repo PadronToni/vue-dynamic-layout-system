@@ -1,4 +1,4 @@
-import { inject, shallowRef, type ShallowRef } from "vue"
+import { shallowRef, type ShallowRef } from "vue"
 import type { LayoutComponentLike } from "./types"
 import { currentLayout } from "./globals"
 import { _config, type LSConfig } from "."
@@ -6,9 +6,7 @@ import { _config, type LSConfig } from "."
 function defineUseLS<Layouts extends LSConfig['layouts']>(sharedLayoutRef: ShallowRef<LayoutComponentLike | undefined>, config: LSConfig) {
   return () => {
 
-    /**
-     * Sets the current layout
-     */
+    /** Sets the current layout */
     function setLayout(layout: Extract<keyof Layouts, string> | LayoutComponentLike) {
       if (typeof layout === 'string') {
 
@@ -39,6 +37,3 @@ export function defineLayoutSystem<Config extends LSConfig>(config: Config) {
  * Centralized version
  */
 export const useLayoutSystem = defineUseLS(currentLayout, _config)
-
-// const fif = defineLayoutSystem({ layouts: { default: 'aside', stronzio: 'article' } })
-// fif.useLayoutSystem().setLayout('stronzio')
