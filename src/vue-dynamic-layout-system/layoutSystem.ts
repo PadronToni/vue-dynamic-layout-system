@@ -1,28 +1,47 @@
-import { inject } from "vue"
+import { inject, shallowRef, type ShallowRef } from "vue"
 import type { LayoutComponentLike } from "./types"
-import { LSBaseKey } from "./globals"
-import { _config } from "."
+import { currentLayout } from "./globals"
+import { _config, type LSConfig } from "."
 
-export const useLayoutSystem = () => {
+function defineUseLS<Layouts extends LSConfig['layouts']>(sharedLayoutRef: ShallowRef<LayoutComponentLike | undefined>,  config: LSConfig) {
+  return () => {
 
-  // gets the shared current layout
-  const _layout = inject(LSBaseKey)!
+    // gets the shared current layout
+    const _layout = sharedLayoutRef
 
-  type fif = Extract<keyof typeof _config.layouts, string>
-  /**
-   * Sets the current layout
-   */
-  function setLayout(layout: fif | LayoutComponentLike) {
-    if (typeof layout === 'string') {
+    /**
+     * Sets the current layout
+     */
+    function setLayout(layout: Extract<keyof Layouts, string> | LayoutComponentLike) {
+      if (typeof layout === 'string') {
 
-      const component = _config.layouts[layout]
+        const component = config.layouts[layout]
 
-      _layout.value = component || layout
-    } else {
+        _layout.value = component || layout
+      } else {
 
-      _layout.value = layout
+        _layout.value = layout
+      }
     }
-  }
 
-  return { setLayout, layout: _layout }
+    return { setLayout, layout: _layout }
+  }
 }
+
+export function defineLayoutSystem<C extends LSConfig>(init: C) {
+
+  const currentLayout = shallowRef<LayoutComponentLike | undefined>()
+
+  const useLayoutSystem = defineUseLS<C['layouts']>(currentLayout, init)
+
+  return { useLayoutSystem }
+
+}
+
+/**
+ * Centralized version
+ */
+export const useLayoutSystem = defineUseLS(currentLayout, _config)
+
+// const fif = defineLayoutSystem({ layouts: { default: 'aside', stronzio: 'article' } })
+// fif.useLayoutSystem().setLayout('stronzio')
