@@ -1,9 +1,8 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
-  <main>
-    <h1> Home view </h1>
+  <main class="p-4">
+    <RouterView></RouterView>
   </main>
 </template>
