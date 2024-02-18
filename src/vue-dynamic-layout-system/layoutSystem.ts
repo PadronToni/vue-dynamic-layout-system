@@ -23,11 +23,20 @@ function defineUseLS<Layouts extends LSConfig['layouts']>(sharedLayoutRef: Shall
   }
 }
 
-export function defineLayoutSystem<Config extends LSConfig>(config: Config) {
+const DEF_CONFIG: LSConfig = {
+  layouts: {
+    default: 'div'
+  }
+}
+
+export function defineLayoutSystem<Config extends LSConfig>(config?: Config) {
+
+  // saves possible custom config
+  const __config =  Object.assign({}, DEF_CONFIG, config);
 
   const layoutRef = shallowRef<LayoutComponentLike | undefined>()
 
-  const useLayoutSystem = defineUseLS<Config['layouts']>(layoutRef, config)
+  const useLayoutSystem = defineUseLS<Config['layouts']>(layoutRef, __config)
 
   return { useLayoutSystem }
 
